@@ -88,8 +88,10 @@ class LoginApiView(APIView):
     def post(self,request,format=None):
         serializers = LoginSerializer(data=request.data, partial=True)
         if serializers.is_valid(raise_exception=True):
-            username = request.query_params.get('username','')
-            password = request.query_params.get('password','')
+            username = request.data.get('username','')
+            password = request.data.get('password','')
+            print(username)
+            print(password)
             if username == '' and password == '':
                 return Response({'error':{'none_filed_error':['Username or password is not write']}},status=status.HTTP_204_NO_CONTENT)
             user = authenticate(username=username, password=password)
