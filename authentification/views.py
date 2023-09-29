@@ -21,6 +21,7 @@ from drf_yasg import openapi
 
 from .serializers import *
 from .utils import *
+from .renderers import UserRenderers
 
 import jwt
 
@@ -99,3 +100,25 @@ class LoginApiView(APIView):
             token = get_token_for_user(user)
             return Response({'token':token},status=status.HTTP_200_OK)
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserProfileView(APIView):
+    render_classes = [UserRenderers]
+    perrmisson_class = [IsAuthenticated]
+    serializers = UserProfileSerializer
+    token_param_config = openapi.Parameter('token', in_=openapi.IN_QUERY, description='Description',type=openapi.TYPE_STRING)
+
+    @swagger_auto_schema(manual_parameters=[token_param_config])
+    def get(self,request,format=None):
+        token = request.query_params.get('token')
+        try:
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms='HS256')
+            user = CustomUser.objects.get(id=payload['user_id'])
+            serializers = self.serializers(user)
+            return Response(serializers.data, status=status.HTTP_200_OK)
+        except jwt.ExpiredSignatureError as indetifier:
+            return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
+        except jwt.exceptions.DecodeError as indetifier:
+            return Response({'error': 'Invalid Token'}, status=status.HTTP_400_BAD_REQUEST)
+
+

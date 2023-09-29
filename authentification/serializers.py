@@ -43,6 +43,7 @@ class EmailVerificationSerializer(serializers.ModelSerializer):
         fields = ['token']
 
 
+
 class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField(max_length=50, min_length=6)
     password = serializers.CharField(max_length=50, min_length=3)
@@ -51,4 +52,19 @@ class LoginSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['username', 'password']
         read_only_fields = ('username',)
+
+
+class RolesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        modal = Group
+        fields = "__all__"
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    groups = RolesSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'date_joined', 'groups']
 
