@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     # Apps
-    'authentification'
+    'authentification',
+    'follower',
+    'post',
+    'message',
+
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,13 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-       'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-}
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -139,6 +137,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(60),
@@ -159,13 +162,14 @@ SIMPLE_JWT = {
 
     'JTI_CLAIM': 'jti',
 }
+FRONTEND_URL = ''
 
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8000",
+    "http://localhost:5173",
+    "http://localhost:3000",
+]
 
-# CORS_ORIGIN_WHITELIST = [
-#     "http://localhost:8000",
-#     "http://localhost:5173",
-#     "http://localhost:3000",
-# ]
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -176,3 +180,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 AUTH_USER_MODEL = 'authentification.CustomUser'
+
