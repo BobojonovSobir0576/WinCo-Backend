@@ -178,10 +178,10 @@ class PasswordTokenCheckView(generics.GenericAPIView):
 
 
 class SetNewPasswordView(generics.GenericAPIView):
-    serializers = PasswordResetCompleteSerializer
+    serializer_class = PasswordResetCompleteSerializer
 
     def patch(self, request):
-        serializer = self.serializers(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response({'message': 'success'}, status=status.HTTP_200_OK)
 

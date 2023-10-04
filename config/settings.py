@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-6hgz%7@8$2b%wnfpgdl2l8wj1(pad%5b=_r=%%#c4(w9xo-v^m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'sobir_0576.pythonanywhere.com']
 
 
 
@@ -141,6 +141,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SIMPLE_JWT = {

@@ -56,7 +56,7 @@ class RegisterByEmailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name','last_name','age','username','email','gender_id','about_me','interests','location_lat','location_lng','avatar','password','uploaded_images','images']
+        fields = ['first_name','last_name','age','username','email','gender_id','about_me','interests','location_lat','location_lng','avatar','password']
         extra_kwargs = {
             'first_name': {'write_only': True},
             'last_name': {'write_only': True},
