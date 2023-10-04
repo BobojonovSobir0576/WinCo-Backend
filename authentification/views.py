@@ -164,6 +164,7 @@ class RequestPasswordRestEmail(generics.GenericAPIView):
 
 
 class PasswordTokenCheckView(generics.GenericAPIView):
+    serializer_class = UserProfileSerializer
     def get(self, request, uidb64, token):
         try:
             id = smart_str(urlsafe_base64_decode(uidb64))

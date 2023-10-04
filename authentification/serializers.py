@@ -21,7 +21,7 @@ import pdb
 class RolesSerializer(serializers.ModelSerializer):
 
     class Meta:
-        modal = Group
+        model = Group
         fields = "__all__"
 
 
