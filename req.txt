@@ -1,5 +1,4 @@
 asgiref
-backports.zoneinfo
 certifi
 Django
 django-cors-headers

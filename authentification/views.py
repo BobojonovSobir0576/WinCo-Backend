@@ -137,10 +137,10 @@ class UserDetailView(APIView):
 
 
 class RequestPasswordRestEmail(generics.GenericAPIView):
-    serializers = PasswordResetSerializer
+    serializer_class = PasswordResetSerializer
 
     def post(self, request):
-        serializers = self.serializers(data=request.data)
+        serializers = self.serializer_class(data=request.data)
 
         email = request.data.get('email')
 
