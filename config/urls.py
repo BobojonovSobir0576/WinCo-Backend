@@ -37,10 +37,10 @@ urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    path('api/v1/auth/',include('authentification.urls')),
-    path('api/v2/follwer/', include('follower.urls')),
-    path('api/v3/post/', include('post.urls')),
-    path('api/v4/msg/', include('message.urls')),
+    path('api/auth/',include('authentification.urls')),
+    path('api/follwer/', include('follower.urls')),
+    path('api/post/', include('post.urls')),
+    path('api/msg/', include('message.urls')),
 ]
 
 
