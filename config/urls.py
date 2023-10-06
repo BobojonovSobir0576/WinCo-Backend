@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/follwer/', include('follower.urls')),
     path('api/post/', include('post.urls')),
     path('api/msg/', include('message.urls')),
+    path('api/payment/', include('payment.urls')),
 ]
 
 
